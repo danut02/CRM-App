@@ -1,0 +1,69 @@
+﻿<Window x:Class="CRM_App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Login" Height="450" Width="800" MinWidth="300px" MinHeight="400px" Icon="/sigla-KOFALM-160x138.png" KeyDown="Enter_Pressed" SizeChanged="WindowSizeChange">
+
+    <Grid>
+       
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Black"/>
+                <GradientStop Color="#FFFFD4D4" Offset="1"/>
+                <GradientStop Color="#FF8FE868"/>
+                <GradientStop Color="#FFE6C4C4" Offset="0.56"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+       
+        <StackPanel Name="LoginForm" VerticalAlignment="Center" HorizontalAlignment="Center" >
+
+          
+            <Label x:Name="Title" Content="LOGIN" HorizontalAlignment="Center" Foreground="#FF212121" FontSize="36" FontWeight="Bold" FontFamily="Rockwell Extra Bold" Margin="0,-90,0,10"/>
+
+          
+            <Image Height="100" Width="100" Source="/sigla-KOFALM-160x138.png" HorizontalAlignment="Center" Margin="0,-60,0,10"/>
+
+           
+            <Label Content="Username" HorizontalAlignment="Center" />
+            <TextBox x:Name="textBox1" Padding="5,0,0,0" Width="120" HorizontalAlignment="Center" BorderBrush="Gray" BorderThickness="1" Margin="0,5,0,5">
+                <TextBox.Resources>
+
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+
+           
+            <Label Content="Password" HorizontalAlignment="Center" />
+            <PasswordBox x:Name="textBox2" Padding="5,0,0,0" Width="120" HorizontalAlignment="Center" Margin="0,5,0,10">
+                <PasswordBox.Template>
+                    <ControlTemplate TargetType="PasswordBox">
+                        <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="1" Background="White">
+                            <ScrollViewer x:Name="PART_ContentHost" />
+                        </Border>
+                    </ControlTemplate>
+                </PasswordBox.Template>
+            </PasswordBox>
+
+           
+            <Button x:Name="Button1" Width="90" Height="36" Background="#FF638AFF" BorderBrush="#FFC3FF01" FontSize="16" FontStyle="Italic" Cursor="Hand" Opacity="0.995" Content="Submit" HorizontalAlignment="Center" Click="Button_Click">
+                <Button.Resources>
+
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="20" Opacity="0.8" RenderingBias="Performance" ShadowDepth="7" Direction="320"/>
+                </Button.Effect>
+            </Button>
+        </StackPanel>
+
+        
+        <Label Content="Contact the administrator if you forgot password" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Foreground="#FFB621FF" Height="31"/>
+    </Grid>
+</Window>

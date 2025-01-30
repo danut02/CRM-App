@@ -1,0 +1,528 @@
+﻿<Window  x:Class="CRM_App.Window2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CRM_App"
+        mc:Ignorable="d"
+        Title="CRM" Height="500" Width="850" ResizeMode="CanResizeWithGrip" MinWidth="650px" MinHeight="470px" Icon="/sigla-KOFALM-160x138.png" SizeChanged="WindowSizeChanged">
+
+    <Window.Resources>
+        <Style TargetType="ScrollBar">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Width" Value="12" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollBar">
+
+                        <Grid x:Name="Bg" Background="AntiqueWhite" Opacity="0.8">
+                            <Track Name="PART_Track" IsDirectionReversed="True" >
+                                <Track.Thumb>
+                                    <Thumb>
+                                        <Thumb.Template>
+                                            <ControlTemplate TargetType="Thumb">
+                                                <Border 
+                                                        CornerRadius="10"
+                                                        Width="9" >
+                                                    <Border.Background>
+                                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                            <GradientStop Color="Black"/>
+                                                            <GradientStop Color="#FFC2E435" Offset="0.753"/>
+                                                            <GradientStop Color="#FF3FD8B2" Offset="0.433"/>
+                                                            <GradientStop Color="#FF3C441A" Offset="1"/>
+                                                        </LinearGradientBrush>
+                                                    </Border.Background>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Thumb.Template>
+                                    </Thumb>
+                                </Track.Thumb>
+                            </Track>
+                        </Grid>
+
+                    </ControlTemplate>
+
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Storyboard x:Key="RotateCircle">
+            <DoubleAnimation
+      Storyboard.TargetName="LoadingImg"
+      Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+      From="0"
+      To="360"
+      Duration="0:0:2"
+      AutoReverse="False"
+      RepeatBehavior="Forever"/>
+        </Storyboard>
+
+        <Storyboard x:Key="RotateAnimation">
+            <DoubleAnimation
+                Storyboard.TargetName="NotificationImage"
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                From="-15"
+                To="15"
+                Duration="0:0:1"
+                AutoReverse="True"
+                RepeatBehavior="Forever"/>
+        </Storyboard>
+    </Window.Resources>
+
+    <Grid>
+
+
+        <Grid.Background>
+
+            <ImageBrush ImageSource="/grandgazinstaltermo_1611155717.jpeg"/>
+        </Grid.Background>
+        <Grid>
+            <Image x:Name="NotificationImage" Grid.Column="3" HorizontalAlignment="Right" 
+   VerticalAlignment="Top"  MaxHeight="300" Margin="0,10,10,0" Width="52" Source="/1182718.png" Cursor="Hand" MouseDown="NotifClick">
+                <Image.RenderTransform>
+                    <RotateTransform Angle="0" />
+                </Image.RenderTransform>
+
+                <Image.RenderTransformOrigin>0.5,0.5</Image.RenderTransformOrigin>
+            </Image>
+            <Image x:Name="LoadingImg" HorizontalAlignment="Center" Height="250" Margin="120,80,0,0" VerticalAlignment="Top" Width="255" Source="/loading.png">
+                <Image.RenderTransform>
+                    <RotateTransform Angle="0" />
+                </Image.RenderTransform>
+
+                <Image.RenderTransformOrigin>0.5,0.5</Image.RenderTransformOrigin>
+
+            </Image>
+
+        </Grid>
+
+        <Grid Name="GridTable" Loaded="WindowLoaded" Margin="300,0,0,0" Height="233">
+
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+
+            </Grid.ColumnDefinitions>
+
+
+
+
+
+            <Border BorderBrush="Black"  CornerRadius="15" BorderThickness="1" Grid.Column="0" Height="233" VerticalAlignment="Center">
+                <Border.Background>
+                    <SolidColorBrush Color="White" Opacity="0.8"/>
+                </Border.Background>
+            </Border>
+            <TextBlock Text="Nume"  VerticalAlignment="Top" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="0,5,0,0" Foreground="#FF0E0D0D" FontFamily="Forte" FontSize="16"/>
+            <TextBlock x:Name="NumeClient" Grid.Column="0" Margin="2,70,2,0" TextWrapping="Wrap" TextAlignment="Center"  VerticalAlignment="Top" Foreground="#FF0A0A0A" Height="29"  />
+
+
+
+
+            <Border Grid.Column="1" CornerRadius="15" BorderBrush="Black" BorderThickness="1" Margin="0,0,0,-97">
+
+                <Border.Background>
+                    <SolidColorBrush Color="White" Opacity="0.765"/>
+                </Border.Background>
+            </Border>
+            <TextBlock Text="Status lucrare" Grid.Column="1" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,5,0,0" Foreground="#FF0E0D0D" Height="51" FontFamily="Forte" FontSize="16" />
+            <TextBlock x:Name="Status" Grid.Column="1" Margin="2,70,0,0" TextWrapping="Wrap" TextAlignment="Center"  VerticalAlignment="Top" Foreground="#FF0A0A0A" Height="134" />
+            <TextBox x:Name="Dropdown_Status" Grid.Column="1" Margin="20,209,18,2" Visibility="Hidden">
+
+                <TextBox.Resources>
+
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </TextBox.Resources>
+                <TextBox.Effect>
+                    <DropShadowEffect BlurRadius="21" Opacity="1" RenderingBias="Performance" ShadowDepth="10" Direction="320"/>
+                </TextBox.Effect>
+
+            </TextBox>
+
+
+            <Border Grid.Column="2" CornerRadius="15" BorderBrush="Black" BorderThickness="1" >
+                <Border.Background>
+                    <SolidColorBrush Color="White" Opacity="0.785"/>
+                </Border.Background>
+            </Border>
+            <TextBlock Text="Adresa" Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Margin="32,5,31,0" Foreground="#FF0E0D0D" FontFamily="Forte" FontSize="16" />
+            <TextBlock x:Name="Adress" Grid.Column="2"  Margin="0,70,0,0" TextWrapping="Wrap" TextAlignment="Center"  VerticalAlignment="Top" Foreground="#FF0A0A0A" Height="41" />
+
+            <Border Grid.Column="3" CornerRadius="15" BorderBrush="Black" BorderThickness="1" Margin="0,0,1,0" RenderTransformOrigin="0.5,0.5"  >
+                <Border.Background>
+                    <SolidColorBrush Color="White" Opacity="0.8"/>
+                </Border.Background>
+                <Border.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Border.RenderTransform>
+            </Border>
+
+            <Border CornerRadius="15" BorderBrush="Black" BorderThickness="1" Margin="0,233,0,-98" RenderTransformOrigin="0.5,0.5">
+                <Border.Background>
+                    <SolidColorBrush Color="White" Opacity="0.8"/>
+                </Border.Background>
+
+
+                <Grid Margin="0,1,0,5">
+                    <TextBlock Text="OL" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,5,0,0" 
+                   Foreground="#FF0E0D0D" FontFamily="Forte" FontSize="16" Height="24" />
+
+                    <Button x:Name="EditOL" Content="Edit" Cursor="Hand" HorizontalAlignment="Center" Margin="0,60,0,0" VerticalAlignment="Top" 
+                Width="50" Height="24" Background="#FF00FFE2" BorderBrush="#FFFF1212" Grid.Column="3" RenderTransformOrigin="0.917,0.258" 
+                 Visibility="Hidden" Click="EditOL_Click">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="10"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                    <Button x:Name="Save_OL" Content="Save" Cursor="Hand" HorizontalAlignment="Center"  Margin="0,62,0,8" Width="50" Background="#FF4EFF00" BorderBrush="#FFFF1212" Visibility="Hidden" Click="SaveOL_Click">
+                        <Button.Resources>
+
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="10"/>
+                            </Style>
+                        </Button.Resources>
+
+                    </Button>
+
+                    <TextBlock x:Name="OL_text" Text=""  Margin="1,29,0,0" TextWrapping="Wrap" TextAlignment="Center"  VerticalAlignment="Top" Foreground="#FF0A0A0A" Height="28" />
+                    <TextBox x:Name="Box_OL" Margin="20,31,20,41" Visibility="Hidden">
+
+                        <TextBox.Resources>
+
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="5"/>
+                            </Style>
+                        </TextBox.Resources>
+                        <TextBox.Effect>
+                            <DropShadowEffect BlurRadius="21" Opacity="1" RenderingBias="Performance" ShadowDepth="10" Direction="320"/>
+                        </TextBox.Effect>
+
+                    </TextBox>
+
+
+                </Grid>
+
+                <Border.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="1"/>
+                        <SkewTransform AngleY="-0.195"/>
+                        <RotateTransform/>
+                        <TranslateTransform Y="-0.231"/>
+                    </TransformGroup>
+                </Border.RenderTransform>
+            </Border>
+
+            <TextBlock Text="Nr. telefon" Grid.Column="3" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="19,5,18,0" Foreground="#FF0E0D0D" FontFamily="Forte" FontSize="16" />
+            <TextBlock x:Name="NrTelefon" Grid.Column="3" Margin="30,70,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100px" Foreground="#FF0A0A0A" Height="26" />
+
+
+            <Button x:Name="Save_Button" Content="Save" Cursor="Hand" HorizontalAlignment="Center"  Margin="0,244,0,-35" Width="50" Background="#FF4EFF00" BorderBrush="#FFFF1212" Grid.Column="1" Visibility="Hidden" Click="Save_Click">
+                <Button.Resources>
+
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+
+            </Button>
+
+            <Button x:Name="Button_Status" Content="Edit" Cursor="Hand" HorizontalAlignment="Center" Margin="0,209,0,0" VerticalAlignment="Top" Width="50" Height="24" Background="#FF00FFE2" BorderBrush="#FFFF1212" Grid.Column="1" Click="Edit_Status" Visibility="Hidden">
+
+                <Button.Resources>
+
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+
+            </Button>
+
+            <Button x:Name="Btn_Address" Content="Edit" Cursor="Hand" HorizontalAlignment="Center" Margin="0,130,0,0" VerticalAlignment="Top" Width="50" Height="24" Background="#FF00FFE2" BorderBrush="#FFFF1212" Grid.Column="2" Click="Edit_Address" Visibility="Hidden">
+                <Button.Resources>
+
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+
+            </Button>
+            <TextBox Name="UpdateAddressTxt" Grid.Column="2" Margin="20,145,20,66" Visibility="Hidden">
+                <TextBox.Resources>
+
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </TextBox.Resources>
+                <TextBox.Effect>
+                    <DropShadowEffect BlurRadius="21" Opacity="1" RenderingBias="Performance" ShadowDepth="10" Direction="320"/>
+                </TextBox.Effect>
+
+            </TextBox>
+            <Button x:Name="Save_Button2" Content="Save" Cursor="Hand" HorizontalAlignment="Center"  Margin="38,116,37,0" VerticalAlignment="Top" Width="50" Height="24" Background="#FF4EFF00" BorderBrush="#FFFF1212" Grid.Column="2" Visibility="Hidden" Click="SaveAddr_Click">
+
+
+                <Button.Resources>
+
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+
+            </Button>
+            <Button x:Name="EditPhoneTxt" Content="Edit" Cursor="Hand" HorizontalAlignment="Center" Margin="0,130,0,0" VerticalAlignment="Top" Width="50" Height="24" Background="#FF00FFE2" BorderBrush="#FFFF1212" Grid.Column="3" RenderTransformOrigin="0.917,0.258" Click="EditPhone" Visibility="Hidden">
+
+                <Button.Resources>
+
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <TextBox Name="UpdatePhoneTxt" Grid.Column="3" Margin="20,145,20,66" Visibility="Hidden">
+                <TextBox.Resources>
+
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </TextBox.Resources>
+                <TextBox.Effect>
+                    <DropShadowEffect BlurRadius="21" Opacity="1" RenderingBias="Performance" ShadowDepth="10" Direction="320"/>
+                </TextBox.Effect>
+
+            </TextBox>
+            <Button x:Name="Save_Button3" Content="Save" Cursor="Hand" HorizontalAlignment="Center"  Margin="38,116,37,0" VerticalAlignment="Top" Width="50" Height="24" Background="#FF4EFF00" BorderBrush="#FFFF1212" Grid.Column="3" Visibility="Hidden" Click="SavePhone_Click">
+
+
+                <Button.Resources>
+
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+
+            </Button>
+        </Grid>
+
+
+        <Grid>
+
+            <ScrollViewer Margin="0,0,543,0"  
+                      VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" CanContentScroll="False"
+               MaxWidth="300">
+
+                <ScrollViewer.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="0.85">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="White" Offset="1"/>
+                        <GradientStop Color="#FFFF0E0E" Offset="0.007"/>
+                    </LinearGradientBrush>
+                </ScrollViewer.Background>
+                <StackPanel>
+
+
+                    <TextBlock HorizontalAlignment="Left" Margin="38,19,20,0" TextWrapping="Wrap" VerticalAlignment="Top"  FontFamily="Arial Black" FontSize="22"><Run Text="Bine ai venit,"/><LineBreak/><Run Text=" "/><LineBreak/><Run/></TextBlock>
+                    <TextBlock x:Name="NumeUserCRM" HorizontalAlignment="Left" Margin="38,-35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" FontFamily="Arial Black"/>
+                    <TextBox x:Name="SearchBox" Width="110" Height="28" Padding="5,5,0,0" Margin="-25,20,0,0" SelectionBrush="#FF007EE2" SelectionTextBrush="White" Background="White" KeyDown="EnterSearch" TextChanged="Search_TextChanged">
+                        <TextBox.Resources>
+
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="5"/>
+                            </Style>
+                        </TextBox.Resources>
+                        <TextBox.CaretBrush>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="Black"/>
+                                <GradientStop Color="#FFB5ADAD" Offset="1"/>
+                            </LinearGradientBrush>
+                        </TextBox.CaretBrush>
+                    </TextBox>
+                    <Button Name="SearchBtn" Width="40" Height="40" Cursor="Hand" Margin="130,-35,0,0" Click="SearchClick">
+
+                        <Button.Resources>
+
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="15"/>
+                            </Style>
+                        </Button.Resources>
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Grid>
+
+                                    <Image Source="/search.png" Stretch="Fill"/>
+
+
+                                    <Border x:Name="HoverBackground" Background="White" Opacity="0.3">
+
+
+                                    </Border>
+
+
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Grid>
+
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="HoverBackground"  Property="Opacity" Value="0.5" />
+                                        <Setter TargetName="HoverBackground"  Property="Background" Value="#FF45FB13" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+
+                    <TextBlock x:Name="TotalClients"  Text="" Margin="0,10,0,0" TextWrapping="Wrap" TextAlignment="Center" FontSize="14" Height="45"></TextBlock>
+                    <Button x:Name="AddCl" Width="40px" Height="40px" Margin="10,25,0,0" Content="+" FontFamily="Arial Black" FontSize="24" Foreground="#FF010102" Background="#FF00FFF9" BorderThickness="3,3,3,3" Cursor="Hand" Click="AddClient_Click">
+                        <Button.Resources>
+
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </Button.Resources>
+
+                    </Button>
+                     
+                    <Button Name="FilterCl" Width="60px" Height="25px" Margin="0,30,0,-20" Content=" Filtreaza " BorderThickness="0,0,0,0" Cursor="Hand" Background="#FF11FFEF" Click="FilterCl_Click" Visibility="Visible">
+                        <Button.Resources>
+
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="12"/>
+                            </Style>
+                        </Button.Resources>
+
+
+                    </Button>
+
+                    <Button x:Name="Cl_InLucru" Width="150px" Height="30px" Margin="0,-5,0,-20" Content=" Clienti cu status in lucru " BorderThickness="0,0,0,0" Cursor="Hand" Background="#FF11FFEF" Click="Cl_InLucru_Click" Visibility="Hidden">
+                        <Button.Resources>
+
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="12"/>
+                            </Style>
+                        </Button.Resources>
+
+
+                    </Button>
+
+                    <Button x:Name="Cl_Final" Width="150px" Height="30px" Margin="0,30,0,-20" Content=" Clienti cu status finalizat " BorderThickness="0,0,0,0" Cursor="Hand" Background="#FF11FFEF" Click="ClFinal_Click" Visibility="Hidden">
+                        <Button.Resources>
+
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="12"/>
+                            </Style>
+                        </Button.Resources>
+
+
+                    </Button>
+                    <Button x:Name="Cl_programare" Width="180px" Height="30px" Margin="0,30,0,-20" Content=" Clienti in curs de programare " BorderThickness="0,0,0,0" Cursor="Hand" Background="#FF11FFEF" Visibility="Hidden" Click="Cl_programare_click">
+                        <Button.Resources>
+
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="12"/>
+                            </Style>
+                        </Button.Resources>
+
+
+                    </Button>
+                    <Button x:Name="Cl_avize" Width="100px" Height="30px" Margin="0,30,0,-20" Content=" Clienti cu avize " BorderThickness="0,0,0,0" Cursor="Hand" Background="#FF11FFEF" Visibility="Hidden" Click="Cl_avize_click">
+                        <Button.Resources>
+
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="12"/>
+                            </Style>
+                        </Button.Resources>
+
+
+                    </Button>
+                    <ItemsControl x:Name="ClientiDb" ItemsSource="{Binding Clients}" Margin="0,-50,0,0">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical" Margin="10,10,0,40">
+                                    <TextBlock Text="{Binding ClientName}" TextWrapping="Wrap" TextAlignment="Center" Margin="0,0,0,10" FontSize="14" FontFamily="Franklin Gothic Heavy"/>
+                                    <Button Content="Detalii" Width="40px" Cursor="Hand" Height="25" Background="Cyan" BorderThickness="1.5" Margin="0,0,0,0"
+                                    Command="{Binding DataContext.ClientDetailButton, RelativeSource={RelativeSource AncestorType=Window}}" 
+                                    CommandParameter="{Binding}" Click="MouseClick">
+                                        <Button.Resources>
+
+                                            <Style TargetType="{x:Type Border}">
+                                                <Setter Property="CornerRadius" Value="5"/>
+                                            </Style>
+                                        </Button.Resources>
+
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+
+                    <Button Width="75" Height="58" Cursor="Hand" Margin="0,15,0,30" Click="PrintButton_Click">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="20"/>
+                            </Style>
+                        </Button.Resources>
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Grid>
+
+                                    <Border x:Name="HoverBackground">
+                                        <Border.Effect>
+                                            <DropShadowEffect BlurRadius="10" Opacity="1" Direction="50" Color="#FF2D2020" ShadowDepth="8"/>
+                                        </Border.Effect>
+                                    </Border>
+
+
+                                    <Image Source="/9bb92e011cc1351aada16128a280c7c4.png" Stretch="Fill"/>
+
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Grid>
+
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="HoverBackground" Property="Opacity" Value="0.4" />
+                                        <Setter TargetName="HoverBackground" Property="Background" Value="#FF1BEC0A" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                </StackPanel>
+
+            </ScrollViewer>
+
+
+
+        </Grid>
+
+        <TextBlock x:Name="IDcl"  TextWrapping="Wrap" Text="" Margin="256,81,308,216" Visibility="Hidden"/>
+
+
+
+
+
+
+
+    </Grid>
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Window.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource RotateAnimation}" />
+            <BeginStoryboard Storyboard="{StaticResource RotateCircle}" />
+        </EventTrigger>
+    </Window.Triggers>
+</Window>

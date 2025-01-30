@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net8.0-windows</TargetFramework>
+        <RootNamespace>CRM_App</RootNamespace>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UseWPF>true</UseWPF>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Remove="1182718.png" />
+      <None Remove="9bb92e011cc1351aada16128a280c7c4.png" />
+      <None Remove="filter icon.png" />
+      <None Remove="free-search-icon-2911-thumb.png" />
+      <None Remove="grandgazinstaltermo_1611155717.jpeg" />
+      <None Remove="loading.png" />
+      <None Remove="search.png" />
+      <None Remove="sigla-KOFALM-160x138.png" />
+      <None Remove="User-avatar.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="ClosedXML" Version="0.104.2" />
+      <PackageReference Include="Microsoft.Office.Interop.Excel" Version="15.0.4795.1001" />
+      <PackageReference Include="Microsoft.Office.Interop.Word" Version="15.0.4797.1004" />
+      <PackageReference Include="MySql.Data" Version="9.1.0" />
+      <PackageReference Include="PDFsharp" Version="6.1.1" />
+      <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
+      <PackageReference Include="System.IO.Ports" Version="9.0.0" />
+      <PackageReference Include="System.Net.Mail.Abstractions" Version="1.1.21" />
+      <PackageReference Include="System.Windows.Forms.Ribbon35" Version="3.5.8" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Resource Include="1182718.png" />
+      <Resource Include="9bb92e011cc1351aada16128a280c7c4.png" />
+      <Resource Include="filter icon.png" />
+      <Resource Include="free-search-icon-2911-thumb.png" />
+      <Resource Include="grandgazinstaltermo_1611155717.jpeg" />
+      <Resource Include="loading.png" />
+      <Resource Include="search.png" />
+      <Resource Include="sigla-KOFALM-160x138.png" />
+      <Resource Include="User-avatar.png" />
+    </ItemGroup>
+
+</Project>
